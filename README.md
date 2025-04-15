@@ -81,7 +81,7 @@ git Backend clone https://github.com/pareekakhilesh123/JWT-Refresh-Token-Backend
 ```bash
 cd backend
 npm install
-npm start
+nodemon server.js
 ```
 
 ### 3. Run Frontend
