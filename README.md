@@ -1,70 +1,130 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# JWT Authentication with Refresh Token (React + Node.js)
 
-## Available Scripts
+This is a fullstack authentication system using React on the frontend and Node.js with Express on the backend. It supports JWT access tokens and refresh tokens for secure authentication. MongoDB is used for storing user data and is hosted on bd4free.net.
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## 🌍 Live Deployments
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **Frontend (Render)**: https://jwt-refresh-token-frontend.onrender.com/
+-  
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+> ⚠️ Make sure your frontend axios baseURL matches the backend deployment.
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 🗃️ Folder Structure
 
-### `npm run build`
+```
+.
+├── backend
+│   ├── routes/
+│   ├── models/
+│   ├── config/
+│   ├── middleware/
+│   └── server.js
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+├── frontend
+│   
+│   ├── components/
+            ├── pages/
+│   ├── middware/
+│   └── App.js
+├── README.md
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+---
 
-### `npm run eject`
+## 🛠️ Tech Stack
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- React.js (Frontend)
+- Node.js + Express.js (Backend)
+- MongoDB (bd4free.net)
+- JWT for access and refresh tokens
+- Axios + React Router
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+---
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## 🔐 Backend Environment Variables
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Create a `.env` file in the `backend/` directory:
 
-## Learn More
+```
+PORT=5000
+DB_HOST=db4free.net
+DB_USER=
+DB_PASS= 
+DB_NAME=
+JWT_SECRET=root
+JWT_EXPIRES_IN=1m
+JWT_REFRESH_SECRET=root
+JWT_REFRESH_EXPIRES_IN=2m
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+---
 
-### Code Splitting
+## 🚀 Getting Started Locally
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### 1. Clone the Repository
 
-### Analyzing the Bundle Size
+```bash
+git Frontend clone https://github.com/pareekakhilesh123/-JWT-Refresh-Token-Frontend
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+git Backend clone https://github.com/pareekakhilesh123/JWT-Refresh-Token-Backend
+```
 
-### Making a Progressive Web App
+### 2. Run Backend
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+```bash
+cd backend
+npm install
+npm start
+```
 
-### Advanced Configuration
+### 3. Run Frontend
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+```bash
+cd frontend
+npm install
+npm start
+```
 
-### Deployment
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## 📡 API Endpoints
 
-### `npm run build` fails to minify
+### POST `/api/auth/register`
+Register a new user.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### POST `/api/auth/login`
+Login and receive access & refresh tokens.
+
+### GET `/api/auth/profile`
+Fetch profile info (requires access token in `Authorization` header).
+
+### POST `/api/auth/refresh`
+Request a new access token using the refresh token.
+
+---
+
+## 🔁 Token Refresh Logic
+
+1. `axiosInstance` checks for 401 error.
+2. Sends stored refreshToken to `/api/auth/refresh`.
+3. Receives and stores new accessToken.
+4. Retries the original request.
+
+---
+
+## 📌 Notes
+
+- Store `accessToken` and `refreshToken` in `localStorage`
+- Refresh token route secured and validated with a separate secret
+- Render supports environment variables in its settings panel
+
+---
+
+
