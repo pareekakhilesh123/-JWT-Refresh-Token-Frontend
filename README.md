@@ -41,7 +41,7 @@ This is a fullstack authentication system using React on the frontend and Node.j
 
 - React.js (Frontend)
 - Node.js + Express.js (Backend)
-- MongoDB (bd4free.net)
+- Mysql (bd4free.net)
 - JWT for access and refresh tokens
 - Axios + React Router
 
